@@ -1,0 +1,20 @@
+---
+# tasks file for demo-role
+    - name: Install Apache on Amazon Linux
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Copy file to Apache root
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Start and enable Apache service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
